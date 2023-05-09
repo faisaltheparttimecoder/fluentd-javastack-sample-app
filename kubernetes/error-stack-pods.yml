@@ -1,0 +1,250 @@
+---
+## create a simple error stack in spring boot which look like this
+#
+#
+# 2023-05-07 10:58:25.555 ERROR 7 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.RuntimeException: Forcefully throwing up Internal Spring Boot exception!] with root cause
+
+# java.lang.RuntimeException: Forcefully throwing up Internal Spring Boot exception!
+#         at com.self.simpleSpring.SimpleSpringApplication.throwException(SimpleSpringApplication.java:22) ~[classes!/:0.0.1-SNAPSHOT]
+#         at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+#         at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+#         at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+#         at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+#         at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.27.jar!/:5.3.27]
+#         at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar!/:5.3.27]
+#         at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar!/:5.3.27]
+#         at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.27.jar!/:5.3.27]
+#         at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar!/:5.3.27]
+#         at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.valves.RemoteIpValve.invoke(RemoteIpValve.java:768) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.74.jar!/:na]
+#         at java.base/java.lang.Thread.run(Thread.java:829) ~[na:na]
+#
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-spring-boot-java-stack-error-generator
+  namespace: java-error-stack-ns
+spec:
+  containers:
+  - name: simple-spring-boot-java-stack
+    image: dockerfaisalali/simple-spring-boot-java-stack-error:0.0.1
+
+
+---
+# create a error stack in spring webflux which look like this
+# org.springframework.web.reactive.function.client.WebClientRequestException: Failed to resolve 'non-existing-server' [A(1)] after 2 queries ; nested exception is java.net.UnknownHostException: Failed to resolve 'non-existing-server' [A(1)] after 2 queries 
+#         at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:141) ~[spring-webflux-5.3.27.jar!/:5.3.27]
+#         Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+# Error has been observed at the following site(s):
+#         *__checkpoint ⇢ Request to GET null [DefaultWebClient]
+#         *__checkpoint ⇢ Handler com.self.simpleSpringWebFlux.SimpleSpringWebFluxApplication#hello() [DispatcherHandler]
+#         *__checkpoint ⇢ HTTP GET "/throwException" [ExceptionHandlingWebHandler]
+# Original Stack Trace:
+#                 at org.springframework.web.reactive.function.client.ExchangeFunctions$DefaultExchangeFunction.lambda$wrapException$9(ExchangeFunctions.java:141) ~[spring-webflux-5.3.27.jar!/:5.3.27]
+#                 at reactor.core.publisher.MonoErrorSupplied.subscribe(MonoErrorSupplied.java:55) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.Mono.subscribe(Mono.java:4490) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxPeek$PeekSubscriber.onError(FluxPeek.java:222) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.MonoNext$NextSubscriber.onError(MonoNext.java:93) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.MonoFlatMapMany$FlatMapManyMain.onError(MonoFlatMapMany.java:204) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.SerializedSubscriber.onError(SerializedSubscriber.java:124) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.whenError(FluxRetryWhen.java:225) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxRetryWhen$RetryWhenOtherSubscriber.onError(FluxRetryWhen.java:274) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onError(FluxContextWrite.java:121) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.drain(FluxConcatMap.java:415) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxConcatMap$ConcatMapImmediate.onNext(FluxConcatMap.java:251) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onNext(FluxContextWrite.java:107) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.EmitterProcessor.drain(EmitterProcessor.java:537) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.EmitterProcessor.tryEmitNext(EmitterProcessor.java:343) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.SinkManySerialized.tryEmitNext(SinkManySerialized.java:100) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.InternalManySink.emitNext(InternalManySink.java:27) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxRetryWhen$RetryWhenMainSubscriber.onError(FluxRetryWhen.java:190) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:201) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.netty.http.client.HttpClientConnect$MonoHttpConnect$ClientTransportSubscriber.onError(HttpClientConnect.java:311) ~[reactor-netty-http-1.0.31.jar!/:1.0.31]
+#                 at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:201) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.netty.resources.DefaultPooledConnectionProvider$DisposableAcquire.onError(DefaultPooledConnectionProvider.java:160) ~[reactor-netty-core-1.0.31.jar!/:1.0.31]
+#                 at reactor.core.publisher.FluxContextWrite$ContextWriteSubscriber.onError(FluxContextWrite.java:121) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.netty.internal.shaded.reactor.pool.AbstractPool$Borrower.fail(AbstractPool.java:475) ~[reactor-netty-core-1.0.31.jar!/:1.0.31]
+#                 at reactor.netty.internal.shaded.reactor.pool.SimpleDequePool.lambda$drainLoop$9(SimpleDequePool.java:431) ~[reactor-netty-core-1.0.31.jar!/:1.0.31]
+#                 at reactor.core.publisher.FluxDoOnEach$DoOnEachSubscriber.onError(FluxDoOnEach.java:186) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.MonoCreate$DefaultMonoSink.error(MonoCreate.java:201) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.netty.resources.DefaultPooledConnectionProvider$PooledConnectionAllocator$PooledConnectionInitializer.onError(DefaultPooledConnectionProvider.java:558) ~[reactor-netty-core-1.0.31.jar!/:1.0.31]
+#                 at reactor.core.publisher.MonoFlatMap$FlatMapMain.secondError(MonoFlatMap.java:192) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.MonoFlatMap$FlatMapInner.onError(MonoFlatMap.java:259) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:106) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.Operators.error(Operators.java:198) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.MonoError.subscribe(MonoError.java:53) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.Mono.subscribe(Mono.java:4490) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onError(FluxOnErrorResume.java:103) ~[reactor-core-3.4.29.jar!/:3.4.29]
+#                 at reactor.netty.transport.TransportConnector$MonoChannelPromise.tryFailure(TransportConnector.java:580) ~[reactor-netty-core-1.0.31.jar!/:1.0.31]
+#                 at reactor.netty.transport.TransportConnector.lambda$doResolveAndConnect$11(TransportConnector.java:387) ~[reactor-netty-core-1.0.31.jar!/:1.0.31]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:557) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:629) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.setFailure(DefaultPromise.java:110) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.InetSocketAddressResolver$2.operationComplete(InetSocketAddressResolver.java:86) ~[netty-resolver-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:629) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:118) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsResolveContext.finishResolve(DnsResolveContext.java:1096) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsResolveContext.tryToFinishResolve(DnsResolveContext.java:1035) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsResolveContext.query(DnsResolveContext.java:422) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsResolveContext.onResponse(DnsResolveContext.java:655) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsResolveContext.access$500(DnsResolveContext.java:66) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsResolveContext$2.operationComplete(DnsResolveContext.java:482) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:105) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsQueryContext.trySuccess(DnsQueryContext.java:232) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsQueryContext.finish(DnsQueryContext.java:224) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.resolver.dns.DnsNameResolver$DnsResponseHandler.channelRead(DnsNameResolver.java:1364) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:103) ~[netty-codec-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.epoll.EpollDatagramChannel.processPacket(EpollDatagramChannel.java:662) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.epoll.EpollDatagramChannel.recvmsg(EpollDatagramChannel.java:697) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.epoll.EpollDatagramChannel.access$300(EpollDatagramChannel.java:56) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.epoll.EpollDatagramChannel$EpollDatagramChannelUnsafe.epollInReady(EpollDatagramChannel.java:536) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:499) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:397) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#                 at java.base/java.lang.Thread.run(Thread.java:829) ~[na:na]
+# Caused by: java.net.UnknownHostException: Failed to resolve 'non-existing-server' [A(1)] after 2 queries 
+#         at io.netty.resolver.dns.DnsResolveContext.finishResolve(DnsResolveContext.java:1088) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.resolver.dns.DnsResolveContext.tryToFinishResolve(DnsResolveContext.java:1035) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.resolver.dns.DnsResolveContext.query(DnsResolveContext.java:422) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.resolver.dns.DnsResolveContext.onResponse(DnsResolveContext.java:655) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.resolver.dns.DnsResolveContext.access$500(DnsResolveContext.java:66) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.resolver.dns.DnsResolveContext$2.operationComplete(DnsResolveContext.java:482) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:105) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.resolver.dns.DnsQueryContext.trySuccess(DnsQueryContext.java:232) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.resolver.dns.DnsQueryContext.finish(DnsQueryContext.java:224) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.resolver.dns.DnsNameResolver$DnsResponseHandler.channelRead(DnsNameResolver.java:1364) ~[netty-resolver-dns-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:103) ~[netty-codec-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919) ~[netty-transport-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.epoll.EpollDatagramChannel.processPacket(EpollDatagramChannel.java:662) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.epoll.EpollDatagramChannel.recvmsg(EpollDatagramChannel.java:697) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.epoll.EpollDatagramChannel.access$300(EpollDatagramChannel.java:56) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.epoll.EpollDatagramChannel$EpollDatagramChannelUnsafe.epollInReady(EpollDatagramChannel.java:536) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:499) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:397) ~[netty-transport-classes-epoll-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) ~[netty-common-4.1.91.Final.jar!/:4.1.91.Final]
+#         at java.base/java.lang.Thread.run(Thread.java:829) ~[na:na]
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: complex-spring-webflux-java-stack-error-generator
+  namespace: java-error-stack-ns
+spec:
+  containers:
+  - name: complex-spring-webflux-java-stack
+    image: dockerfaisalali/complex-spring-webflux-java-stack-error:0.0.1
+
+---
+# create a error stack in spring webflux which look like this
+# Exception in thread "main" java.lang.RuntimeException: This is a real complex java stack error from a plain old vanilla java code!!!
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo8(JavaStackComplexPlanJavaApplication.java:52)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo7(JavaStackComplexPlanJavaApplication.java:44)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo6(JavaStackComplexPlanJavaApplication.java:39)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo5(JavaStackComplexPlanJavaApplication.java:34)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo4(JavaStackComplexPlanJavaApplication.java:29)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo3(JavaStackComplexPlanJavaApplication.java:24)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo2(JavaStackComplexPlanJavaApplication.java:20)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo1(JavaStackComplexPlanJavaApplication.java:16)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.main(JavaStackComplexPlanJavaApplication.java:12)
+# Caused by: java.lang.NumberFormatException: For input string: "10.1"
+#         at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+#         at java.lang.Integer.parseInt(Integer.java:580)
+#         at java.lang.Integer.parseInt(Integer.java:615)
+#         at com.self.javastackcomplexplainjava.JavaStackComplexPlanJavaApplication.foo8(JavaStackComplexPlanJavaApplication.java:50)
+#         ... 8 more
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: complex-plain-java-error-generator
+  namespace: java-error-stack-ns
+spec:
+  containers:
+  - name: complex-plain-java-error
+    image: dockerfaisalali/complex-plain-java-stack-error-app:0.0.1

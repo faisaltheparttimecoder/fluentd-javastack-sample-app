@@ -1,0 +1,50 @@
+--- 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: fluentd
+data:
+  fluent.conf: |-
+    ################################################################
+    # This source gets all logs from local docker host
+    @include pods-kind-fluent.conf
+    @include file-fluent.conf
+  pods-kind-fluent.conf: |-
+    <source>
+      @type tail
+      path /var/log/containers/*java-error-stack-ns*.log
+      exclude_path ["/var/log/containers/**fluentd**.log", "/var/log/containers/**kube-system**.log"]
+      pos_file /var/log/fluentd-containers-test-error-ns.log.pos
+      tag kubernetes.applog.*
+      format /^(?<time>.+) (?<stream>stdout|stderr) [^ ]* (?<log>.*)$/
+      time_format %Y-%m-%dT %H:%M:%S.%N
+      read_from_head true
+    </source>
+
+    <filter kubernetes.applog.**>
+        @type kubernetes_metadata
+        # @id filter_kube_metadata
+        kubernetes_url "#{ENV['FLUENT_FILTER_KUBERNETES_URL'] || 'https://' + ENV.fetch('KUBERNETES_SERVICE_HOST') + ':' + ENV.fetch('KUBERNETES_SERVICE_PORT') + '/api'}"
+        verify_ssl "#{ENV['KUBERNETES_VERIFY_SSL'] || true}"
+        ca_file "#{ENV['KUBERNETES_CA_FILE']}"
+        skip_labels "#{ENV['FLUENT_KUBERNETES_METADATA_SKIP_LABELS'] || 'false'}"
+        skip_container_metadata "#{ENV['FLUENT_KUBERNETES_METADATA_SKIP_CONTAINER_METADATA'] || 'false'}"
+        skip_master_url "#{ENV['FLUENT_KUBERNETES_METADATA_SKIP_MASTER_URL'] || 'false'}"
+        skip_namespace_metadata "#{ENV['FLUENT_KUBERNETES_METADATA_SKIP_NAMESPACE_METADATA'] || 'false'}"
+    </filter>
+
+    <match kubernetes.applog.**>
+      @type detect_exceptions_with_webflux_support
+      remove_tag_prefix kubernetes
+      message log
+      languages java
+      multiline_flush_interval 1
+      force_line_breaks true
+    </match>
+
+    <match applog.**>
+      @type file
+      path /tmp/file-java-error-stack-ns.log
+    </match>
+
